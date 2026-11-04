@@ -135,6 +135,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+                // Canal exclusivo para eventos de seguridad (TP Logging)
+        'security' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/security.log'),
+            'level' => 'info',
+            'days' => 30, // Retención de 30 días
+        ],
     ],
 
 ];

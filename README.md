@@ -57,3 +57,11 @@ Al consumir este endpoint REST, la aplicación recibe el objeto JSON completo co
 *   `uptime_s`
 *   `at` (timestamp)
 Este problema se conoce como **Over-fetching** y es exactamente lo que soluciona GraphQL, permitiendo al cliente pedir únicamente el campo `cpu_temp_c`.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+TP Logging Deteccion de Incidentes Laravel
+
+'email' => 'test@test.com'
+'password' => '123456'

@@ -25,3 +25,8 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+# Ignorar binario de Cloudflare
+cloudflared-linux-amd64
+
+# Ignorar archivos de base de datos locales si usás sqlite
+/database/*.sqlite
