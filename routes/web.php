@@ -23,4 +23,4 @@ Route::post('/security-login', [SecurityLoginController::class, 'login'])
 
 // Panel de seguridad. 
 // Nota: Para la entrega final, se recomienda agregar el middleware de auth y permisos.
-Route::get('/security-dashboard', [SecurityDashboardController::class, 'index']);
+Route::get('/security-dashboard', [SecurityDashboardController::class, 'index'])->name('security.dashboard');
