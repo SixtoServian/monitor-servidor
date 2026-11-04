@@ -112,3 +112,29 @@ Se eligieron dos mejoras para un entorno de producción:
 *   [Logs del Sistema](./docs/logs-del-sistema.png)
 *   [Bloqueo HTTP 429](./docs/bloqueo-1.png)
 *   [Bloqueo HTTP 429](./docs/bloqueo-2.png)
+
+-------------
+1. ¿Qué IP concentra los fallos?
+En las pruebas locales, la IP 127.0.0.1 (o la IP de la red local/Docker, ej: 172.18.0.1) es la que concentra el 100% de los fallos, ya que es desde donde realizamos las pruebas simulando el ataque.
+
+2. ¿Puede afirmarse que existe un ataque?
+No de forma categórica solo con estos datos. Podría tratarse de un usuario legítimo que olvidó su contraseña (lo que en seguridad se llama un "falso positivo"). Para afirmar que es un ataque de fuerza bruta, se necesita correlacionar este patrón con otras evidencias (como veremos en el punto 4).
+
+3. ¿Qué efectos tendría bloquear una IP compartida?
+Un bloqueo a nivel de IP podría tener un impacto negativo enorme (Denegación de Servicio accidental). En redes corporativas, universidades o conexiones móviles, cientos de usuarios legítimos comparten la misma IP pública debido al NAT. Bloquear esa IP dejaría a todos ellos sin acceso al sistema.
+
+4. ¿Qué evidencias adicionales se necesitan?
+
+    El User-Agent: Si los fallos vienen de herramientas como curl o python-requests, es un bot. Si viene de un navegador real, es un humano.
+
+    El identificador (Email): Si el atacante intenta con 100 correos distintos, busca hacer un barrido. Si intenta 100 veces con el mismo correo, está atacando a un usuario específico.
+
+    Velocidad de los intentos: Un humano tarda segundos en tipear; un script hace 100 peticiones por segundo.
+
+    Geolocalización: Si el login es de un país donde la empresa no opera.
+
+5. ¿Qué respuestas conviene automatizar?
+
+    Automático: El bloqueo temporal (10 minutos), el registro en base de datos de cada intento, la escritura en el log de seguridad y el envío de alertas críticas a los administradores (por ejemplo, a un canal de Slack o Telegram, como sugiere la teoría).
+
+    Revisión Humana: El bloqueo permanente de una IP, la suspensión de la cuenta de un usuario, el contacto con el usuario afectado y la evaluación de si los datos fueron comprometidos.
